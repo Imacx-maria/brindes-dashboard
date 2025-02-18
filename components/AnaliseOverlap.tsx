@@ -105,7 +105,12 @@ const AnaliseOverlap = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="cliente" />
                   <YAxis />
-                  <Tooltip formatter={(value) => `€${value.toFixed(2)}`} />
+                  <Tooltip formatter={(value) => {
+                    if (typeof value === 'number') {
+                      return `${value.toFixed(1)}x`;
+                    }
+                    return `${value}x`;
+                  }} />
                   <Legend />
                   <Bar dataKey="totalDigital" name="Vendas Digital" fill="#8884d8" />
                   <Bar dataKey="totalBrindes" name="Vendas Brindes" fill="#82ca9d" />
@@ -120,7 +125,12 @@ const AnaliseOverlap = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="cliente" />
                   <YAxis />
-                  <Tooltip formatter={(value) => `${value.toFixed(1)}x`} />
+                  <Tooltip formatter={(value) => {
+                    if (typeof value === 'number') {
+                      return `${value.toFixed(1)}x`;
+                    }
+                    return `${value}x`;
+                  }} />
                   <Bar dataKey="ratio" name="Ratio Digital/Brindes" fill="#ff7c43" />
                 </BarChart>
               </ResponsiveContainer>

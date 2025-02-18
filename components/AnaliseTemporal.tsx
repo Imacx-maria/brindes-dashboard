@@ -90,7 +90,12 @@ const AnaliseTemporal = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="mes" />
                   <YAxis />
-                  <Tooltip formatter={(value) => `€${value.toFixed(2)}`} />
+                  <Tooltip formatter={(value) => {
+                    if (typeof value === 'number') {
+                      return `€${value.toFixed(2)}`;
+                    }
+                    return `€${value}`;
+                  }} />
                   <Legend />
                   <Line dataKey="vendas2023" name="2023" stroke="#8884d8" />
                   <Line dataKey="vendas2024" name="2024" stroke="#82ca9d" />
@@ -105,7 +110,12 @@ const AnaliseTemporal = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="trimestre" />
                   <YAxis />
-                  <Tooltip formatter={(value) => `€${value.toFixed(2)}`} />
+                  <Tooltip formatter={(value) => {
+                    if (typeof value === 'number') {
+                      return `€${value.toFixed(2)}`;
+                    }
+                    return `€${value}`;
+                  }} />
                   <Legend />
                   <Bar dataKey="vendas2023" name="2023" fill="#8884d8" />
                   <Bar dataKey="vendas2024" name="2024" fill="#82ca9d" />

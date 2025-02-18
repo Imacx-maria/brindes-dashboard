@@ -105,7 +105,12 @@ const ComparativoDigital = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="cliente" />
                   <YAxis />
-                  <Tooltip formatter={(value) => `€${value.toFixed(2)}`} />
+                  <Tooltip formatter={(value) => {
+                    if (typeof value === 'number') {
+                      return `€${value.toFixed(2)}`;
+                    }
+                    return `€${value}`;
+                  }} />
                   <Legend />
                   <Bar dataKey="vendas2023" name="2023" fill="#8884d8" />
                   <Bar dataKey="vendas2024" name="2024" fill="#82ca9d" />
@@ -120,7 +125,12 @@ const ComparativoDigital = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="cliente" />
                   <YAxis unit="%" />
-                  <Tooltip formatter={(value) => `${value.toFixed(1)}%`} />
+                  <Tooltip formatter={(value) => {
+                    if (typeof value === 'number') {
+                      return `${value.toFixed(1)}%`;
+                    }
+                    return `${value}%`;
+                  }} />
                   <Bar dataKey="crescimento" name="Crescimento %" fill="#ff7c43" />
                 </BarChart>
               </ResponsiveContainer>

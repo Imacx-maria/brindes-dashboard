@@ -144,9 +144,12 @@ const AnaliseTicketMedio = () => {
                   <XAxis type="number" dataKey="numPedidos" name="Pedidos" />
                   <YAxis type="number" dataKey="ticketMedio" name="Ticket Médio" unit="€" />
                   <ZAxis type="number" dataKey="volumeTotal" range={[100, 600]} />
-                  <Tooltip cursor={{ strokeDasharray: '3 3' }} 
+                  <Tooltip 
+                    cursor={{ strokeDasharray: '3 3' }}
                     formatter={(value, name) => [
-                      name === 'ticketMedio' ? `€${value.toFixed(2)}` : value,
+                      name === 'ticketMedio' 
+                        ? (typeof value === 'number' ? `€${value.toFixed(2)}` : `€${value}`)
+                        : value,
                       name === 'ticketMedio' ? 'Ticket Médio' : 'Nº Pedidos'
                     ]}
                   />
@@ -167,9 +170,11 @@ const AnaliseTicketMedio = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="faixa" />
                   <YAxis />
-                  <Tooltip 
+                  <Tooltip
                     formatter={(value, name) => [
-                      name === 'percentual' ? `${value.toFixed(1)}%` : value,
+                      name === 'percentual' 
+                        ? (typeof value === 'number' ? `${value.toFixed(1)}%` : `${value}%`)
+                        : value,
                       'Clientes'
                     ]}
                   />

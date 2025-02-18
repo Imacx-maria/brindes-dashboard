@@ -92,7 +92,12 @@ const GiftsAnalysisDashboard = () => {
                   <XAxis dataKey="month" />
                   <YAxis yAxisId="left" orientation="left" />
                   <YAxis yAxisId="right" orientation="right" />
-                  <Tooltip formatter={(value) => `€${value.toFixed(2)}`} />
+                  <Tooltip formatter={(value) => {
+                    if (typeof value === 'number') {
+                      return `€${value.toFixed(2)}`;
+                    }
+                    return `€${value}`;
+                  }} />
                   <Legend />
                   <Line 
                     yAxisId="left"
