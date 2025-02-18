@@ -50,12 +50,6 @@ const ComparativoDigital = () => {
     }
   ];
 
-  const desempenhoTotal = {
-    vendas2024: 3200274.70,
-    vendas2023: 2548242.01,
-    crescimento: 25.6
-  };
-
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Navigation Bar */}
