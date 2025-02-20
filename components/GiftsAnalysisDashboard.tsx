@@ -1,22 +1,11 @@
-// components/AnaliseOverlap.tsx
-'use client';  // Add this at the top
+'use client';
 
 import React from 'react';
+import Navigation from '@/components/shared/Navigation';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
 
 const GiftsAnalysisDashboard = () => {
-  const navigationLinks = [
-    { name: 'Sumário Executivo', path: '/' },
-    { name: 'Análise de Brindes', path: '/analise-brindes' },
-    { name: 'Análise de Overlap', path: '/analise-overlap' },
-    { name: 'Análise Temporal', path: '/analise-temporal' },
-    { name: 'Análise de Ticket Médio', path: '/analise-ticket-medio' },
-    { name: 'Comparativo Digital', path: '/comparativo-digital' },
-    { name: 'Análise de Gifts', path: '/gifts-analysis' },
-    { name: 'Dashboard de Gifts', path: '/gifts-dashboard' }
-  ];
-
   const monthlyData = [
     { month: 'Jan', vendas: 40928.70, vendas_acumulado: 40928.70, pedidos: 26 },
     { month: 'Fev', vendas: 30392.73, vendas_acumulado: 71321.43, pedidos: 28 },
@@ -40,28 +29,7 @@ const GiftsAnalysisDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Navigation Bar */}
-      <div className="bg-gray-800 p-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap gap-4">
-            {navigationLinks.map((link) => (
-              <a
-                key={link.path}
-                href={link.path}
-                className={`px-3 py-2 rounded-md text-sm font-medium ${
-                  link.path === '/gifts-dashboard'
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
+      <Navigation />
       <div className="max-w-6xl mx-auto p-4">
         <Card>
           <CardHeader>
@@ -76,8 +44,7 @@ const GiftsAnalysisDashboard = () => {
                 }`}>
                   <h3 className="font-medium">{kpi.metric}</h3>
                   <p className="text-2xl font-bold">
-                    {kpi.metric === 'Novos Clientes' ? kpi.actual :
-                     `€${kpi.actual.toFixed(2)}`}
+                    {kpi.metric === 'Novos Clientes' ? kpi.actual : `€${kpi.actual.toFixed(2)}`}
                   </p>
                   <p className="text-sm">{kpi.completion}% da meta</p>
                 </div>

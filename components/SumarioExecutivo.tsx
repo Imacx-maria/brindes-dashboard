@@ -1,18 +1,8 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import Navigation from '@/components/shared/Navigation';
 
 const SumarioExecutivo = () => {
-  const navigationLinks = [
-    { name: 'Sumário Executivo', path: '/' },
-    { name: 'Análise de Brindes', path: '/analise-brindes' },
-    { name: 'Análise de Overlap', path: '/analise-overlap' },
-    { name: 'Análise Temporal', path: '/analise-temporal' },
-    { name: 'Análise de Ticket Médio', path: '/analise-ticket-medio' },
-    { name: 'Comparativo Digital', path: '/comparativo-digital' },
-    { name: 'Análise de Gifts', path: '/gifts-analysis' },
-    { name: 'Dashboard de Gifts', path: '/gifts-dashboard' }
-  ];
-
   const analysisCards = [
     {
       title: 'Análise de Brindes',
@@ -39,26 +29,7 @@ const SumarioExecutivo = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="bg-gray-800 p-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap gap-4">
-            {navigationLinks.map((link) => (
-              <a
-                key={link.path}
-                href={link.path}
-                className={`px-3 py-2 rounded-md text-sm font-medium ${
-                  link.path === '/' 
-                    ? 'bg-gray-900 text-white' 
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
+      <Navigation />
       <div className="max-w-6xl mx-auto p-4">
         <Card>
           <CardHeader>

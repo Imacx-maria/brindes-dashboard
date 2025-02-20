@@ -1,23 +1,11 @@
-// components/AnaliseOverlap.tsx
-'use client';  // Add this at the top
+'use client';
 
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import Navigation from '@/components/shared/Navigation';
 
 const AnaliseTemporal = () => {
-  // Navigation links - same across all pages
-  const navigationLinks = [
-    { name: 'Sumário Executivo', path: '/' },
-    { name: 'Análise de Brindes', path: '/analise-brindes' },
-    { name: 'Análise de Overlap', path: '/analise-overlap' },
-    { name: 'Análise Temporal', path: '/analise-temporal' },
-    { name: 'Análise de Ticket Médio', path: '/analise-ticket-medio' },
-    { name: 'Comparativo Digital', path: '/comparativo-digital' },
-    { name: 'Análise de Gifts', path: '/gifts-analysis' },
-    { name: 'Dashboard de Gifts', path: '/gifts-dashboard' }
-  ];
-
   const dadosMensais = [
     { mes: 'Jan', vendas2023: 58155.72, vendas2024: 40928.70, pedidos2023: 29, pedidos2024: 26, variacao: -29.6 },
     { mes: 'Fev', vendas2023: 37473.20, vendas2024: 30392.73, pedidos2023: 21, pedidos2024: 28, variacao: -18.9 },
@@ -42,28 +30,8 @@ const AnaliseTemporal = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Navigation Bar */}
-      <div className="bg-gray-800 p-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap gap-4">
-            {navigationLinks.map((link) => (
-              <a
-                key={link.path}
-                href={link.path}
-                className={`px-3 py-2 rounded-md text-sm font-medium ${
-                  link.path === '/analise-temporal'
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
+      <Navigation />
 
-      {/* Main Content */}
       <div className="max-w-6xl mx-auto p-4">
         <Card>
           <CardHeader>
@@ -90,12 +58,7 @@ const AnaliseTemporal = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="mes" />
                   <YAxis />
-                  <Tooltip formatter={(value) => {
-                    if (typeof value === 'number') {
-                      return `€${value.toFixed(2)}`;
-                    }
-                    return `€${value}`;
-                  }} />
+                  <Tooltip formatter={(value) => (typeof value === 'number' ? `€${value.toFixed(2)}` : `€${value}`)} />
                   <Legend />
                   <Line dataKey="vendas2023" name="2023" stroke="#8884d8" />
                   <Line dataKey="vendas2024" name="2024" stroke="#82ca9d" />
@@ -110,12 +73,7 @@ const AnaliseTemporal = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="trimestre" />
                   <YAxis />
-                  <Tooltip formatter={(value) => {
-                    if (typeof value === 'number') {
-                      return `€${value.toFixed(2)}`;
-                    }
-                    return `€${value}`;
-                  }} />
+                  <Tooltip formatter={(value) => (typeof value === 'number' ? `€${value.toFixed(2)}` : `€${value}`)} />
                   <Legend />
                   <Bar dataKey="vendas2023" name="2023" fill="#8884d8" />
                   <Bar dataKey="vendas2024" name="2024" fill="#82ca9d" />

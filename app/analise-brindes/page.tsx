@@ -1,6 +1,6 @@
 // app/page.tsx (homepage)
-import SumarioExecutivo from '@/components/SumarioExecutivo';
+import GiftsAnalysis from '@/components/GiftsAnalysis';
 
 export default function Home() {
-  return <SumarioExecutivo />;
+  return <GiftsAnalysis />;
 }

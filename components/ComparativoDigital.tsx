@@ -1,137 +1,203 @@
-// components/AnaliseOverlap.tsx
-'use client';  // Add this at the top
+'use client';
 
 import React from 'react';
+import Navigation from '@/components/shared/Navigation';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const ComparativoDigital = () => {
-  const navigationLinks = [
-    { name: 'Sumário Executivo', path: '/' },
-    { name: 'Análise de Brindes', path: '/analise-brindes' },
-    { name: 'Análise de Overlap', path: '/analise-overlap' },
-    { name: 'Análise Temporal', path: '/analise-temporal' },
-    { name: 'Análise de Ticket Médio', path: '/analise-ticket-medio' },
-    { name: 'Comparativo Digital', path: '/comparativo-digital' },
-    { name: 'Análise de Gifts', path: '/gifts-analysis' },
-    { name: 'Dashboard de Gifts', path: '/gifts-dashboard' }
+  const digitalGiftsData = [
+    {
+      cliente: "Sumol+Compal Marcas, S.A",
+      displayName: "Sumol+Compal Marca...",
+      vendas2023: 15813,
+      vendas2024: 54116.31
+    },
+    {
+      cliente: "Altavia Ibérica CFA, SA- SUCURSAL EM PORTUGAL",
+      displayName: "Altavia Ibérica CF...",
+      vendas2023: 60049.75,
+      vendas2024: 49260.93
+    },
+    {
+      cliente: "Communisis Portugal, Lda.",
+      displayName: "Communisis Portuga...",
+      vendas2023: 60530.33,
+      vendas2024: 26144.37
+    },
+    {
+      cliente: "HH  Print Management Spain, S.L",
+      displayName: "HH  Print Manageme...",
+      vendas2023: 5159.6,
+      vendas2024: 24680.5
+    },
+    {
+      cliente: "ISS-OEIRAS - INTERNATIONAL SHARING SCHOOL - OEIRAS, S.A",
+      displayName: "ISS-OEIRAS - INTER...",
+      vendas2023: 12437.5,
+      vendas2024: 12101.22
+    },
+    {
+      cliente: "PROMOTORRES E.M.",
+      displayName: "PROMOTORRES E.M.",
+      vendas2023: 24733.15,
+      vendas2024: 11322.4
+    },
+    {
+      cliente: "Nestlé Portugal, S.A",
+      displayName: "Nestlé Portugal, S...",
+      vendas2023: 8050,
+      vendas2024: 9529.6
+    },
+    {
+      cliente: "Laboratórios Atral, SA.",
+      displayName: "Laboratórios Atral...",
+      vendas2023: 4045.2,
+      vendas2024: 7107
+    },
+    {
+      cliente: "Corpo Nacional de Escutas (C.N.E.).",
+      displayName: "Corpo Nacional de ...",
+      vendas2023: 237.6,
+      vendas2024: 3202.5
+    },
+    {
+      cliente: "DESCOPIA DESENHO COPIAS E ARTES GRAFICAS LDA",
+      displayName: "DESCOPIA DESENHO C...",
+      vendas2023: 130,
+      vendas2024: 2935
+    }
   ];
 
-  const top15Clientes = [
+  const digitalNoGiftsData = [
     {
-      cliente: 'Communisis',
-      vendas2024: 825719.55,
-      vendas2023: 780330.28,
-      crescimento: 5.8
+      cliente: "MANUEL RUI AZINHAIS NABEIRO, LDA",
+      displayName: "MANUEL RUI AZINHAI...",
+      vendas2024: 97369.59
     },
     {
-      cliente: 'HH Print',
-      vendas2024: 505257.79,
-      vendas2023: 195676.60,
-      crescimento: 158.2
+      cliente: "DSGPR - Design Criativo Lda.",
+      displayName: "DSGPR - Design Cri...",
+      vendas2024: 91819.5
     },
     {
-      cliente: 'Konica Minolta',
-      vendas2024: 456154.77,
-      vendas2023: 352493.34,
-      crescimento: 29.4
+      cliente: "Astrografe, Lda",
+      displayName: "Astrografe, Lda",
+      vendas2024: 58751.81
     },
     {
-      cliente: 'HH Print Spain',
-      vendas2024: 319068.42,
-      vendas2023: 0,
-      crescimento: 100.0
+      cliente: "PLANETEXPAND - DESIGN STUDIO UNIPESSOAL LDA",
+      displayName: "PLANETEXPAND - DES...",
+      vendas2024: 38588.1
     },
     {
-      cliente: 'Sumol+Compal',
-      vendas2024: 308030.50,
-      vendas2023: 289488.64,
-      crescimento: 6.4
+      cliente: "Laboratórios Sarbec, Lda",
+      displayName: "Laboratórios Sarbe...",
+      vendas2024: 34048.15
+    },
+    {
+      cliente: "Artsana Portugal, S.A.",
+      displayName: "Artsana Portugal, ...",
+      vendas2024: 32825
+    },
+    {
+      cliente: "Reckitt Benckiser (Portugal), SA",
+      displayName: "Reckitt Benckiser ...",
+      vendas2024: 27562
+    },
+    {
+      cliente: "FACING II DISTRIBUIÇÃO UNIPESSOAL LDA",
+      displayName: "FACING II DISTRIBU...",
+      vendas2024: 17157
+    },
+    {
+      cliente: "ACE SUPPLY SERVICES LDA",
+      displayName: "ACE SUPPLY SERVICE...",
+      vendas2024: 16240
+    },
+    {
+      cliente: "JDM DEIGRATIA LDA",
+      displayName: "JDM DEIGRATIA LDA",
+      vendas2024: 12028.11
     }
   ];
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Navigation Bar */}
-      <div className="bg-gray-800 p-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-wrap gap-4">
-            {navigationLinks.map((link) => (
-              <a
-                key={link.path}
-                href={link.path}
-                className={`px-3 py-2 rounded-md text-sm font-medium ${
-                  link.path === '/comparativo-digital'
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
+      <Navigation />
       <div className="max-w-6xl mx-auto p-4">
         <Card>
           <CardHeader>
-            <CardTitle>Comparativo Digital 2023 vs 2024</CardTitle>
+            <CardTitle>Análise Digital vs Gifts 2023-2024</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-3 gap-4 mb-6">
               <div className="bg-blue-50 p-4 rounded">
-                <h3 className="font-medium">Crescimento Total</h3>
-                <p className="text-2xl font-bold">+25.6%</p>
-                <p className="text-sm">€3.2M em 2024</p>
+                <h3 className="font-medium">Total Digital com Gifts</h3>
+                <p className="text-2xl font-bold">
+                  {digitalGiftsData.length} clientes
+                </p>
               </div>
               <div className="bg-green-50 p-4 rounded">
-                <h3 className="font-medium">Maior Crescimento</h3>
-                <p className="text-2xl font-bold">HH Print</p>
-                <p className="text-sm">+158.2%</p>
+                <h3 className="font-medium">Maior Cliente Digital em Gifts</h3>
+                <p className="text-2xl font-bold">
+                  {digitalGiftsData[0]?.cliente || 'N/A'}
+                </p>
+                <p className="text-sm">
+                  €{digitalGiftsData[0]?.vendas2024.toFixed(2) || '0'} em 2024
+                </p>
               </div>
               <div className="bg-purple-50 p-4 rounded">
-                <h3 className="font-medium">Maior Cliente</h3>
-                <p className="text-2xl font-bold">Communisis</p>
-                <p className="text-sm">€825.7k em 2024</p>
+                <h3 className="font-medium">Potencial em Gifts</h3>
+                <p className="text-2xl font-bold">
+                  {digitalNoGiftsData.length} clientes
+                </p>
               </div>
             </div>
 
-            <div className="h-80 mb-6">
-              <h3 className="font-medium mb-4">Volume de Vendas Comparativo (Top 5)</h3>
+            <div className="h-80 mb-16">
+              <h3 className="font-medium mb-4">Top Clientes Digital com Compras em Gifts</h3>
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={top15Clientes}>
+                <BarChart data={digitalGiftsData}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="cliente" />
+                  <XAxis 
+                    dataKey="displayName"
+                    angle={-45} 
+                    textAnchor="end" 
+                    height={100}
+                    tick={{ fontSize: '10px' }}
+                  />
                   <YAxis />
-                  <Tooltip formatter={(value) => {
-                    if (typeof value === 'number') {
-                      return `€${value.toFixed(2)}`;
-                    }
-                    return `€${value}`;
-                  }} />
-                  <Legend />
-                  <Bar dataKey="vendas2023" name="2023" fill="#8884d8" />
-                  <Bar dataKey="vendas2024" name="2024" fill="#82ca9d" />
+                  <Tooltip 
+                    formatter={(value) => `€${value.toFixed(2)}`}
+                    labelFormatter={(label, payload) => payload[0]?.payload?.cliente || label}
+                  />
+                  <Legend verticalAlign="top" align="right" />
+                  <Bar dataKey="vendas2023" name="Gifts 2023" fill="#8884d8" />
+                  <Bar dataKey="vendas2024" name="Gifts 2024" fill="#82ca9d" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
 
-            <div className="h-60 mb-6">
-              <h3 className="font-medium mb-4">Percentual de Crescimento</h3>
+            <div className="h-80 mb-16">
+              <h3 className="font-medium mb-4">Top Clientes Digital sem Compras em Gifts</h3>
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={top15Clientes}>
+                <BarChart data={digitalNoGiftsData}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="cliente" />
-                  <YAxis unit="%" />
-                  <Tooltip formatter={(value) => {
-                    if (typeof value === 'number') {
-                      return `${value.toFixed(1)}%`;
-                    }
-                    return `${value}%`;
-                  }} />
-                  <Bar dataKey="crescimento" name="Crescimento %" fill="#ff7c43" />
+                  <XAxis 
+                    dataKey="displayName"
+                    angle={-45} 
+                    textAnchor="end" 
+                    height={100}
+                    tick={{ fontSize: '10px' }}
+                  />
+                  <YAxis />
+                  <Tooltip 
+                    formatter={(value) => `€${value.toFixed(2)}`}
+                    labelFormatter={(label, payload) => payload[0]?.payload?.cliente || label}
+                  />
+                  <Legend verticalAlign="top" align="right" />
+                  <Bar dataKey="vendas2024" name="Digital 2024" fill="#ff7c43" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -139,11 +205,10 @@ const ComparativoDigital = () => {
             <div className="mt-6 p-4 bg-gray-50 rounded">
               <h3 className="font-semibold mb-2">Insights de Performance</h3>
               <ul className="list-disc pl-4 space-y-2">
-                <li>Crescimento expressivo total de 25.6% em 2024</li>
-                <li>HH Print mais que duplicou seu volume de compras</li>
-                <li>Entrada significativa da HH Print Spain como novo cliente</li>
-                <li>Clientes estabelecidos mostram crescimento estável (Communisis +5.8%, Sumol+Compal +6.4%)</li>
-                <li>Top 5 clientes representam mais de 75% do faturamento digital</li>
+                <li>Identificados {digitalGiftsData.length} clientes digitais ativos em gifts</li>
+                <li>Potencial de expansão para {digitalNoGiftsData.length} novos clientes de gifts</li>
+                <li>{digitalGiftsData[0]?.cliente || 'N/A'} lidera em compras de gifts entre clientes digitais</li>
+                <li>Oportunidade de cross-selling com clientes digitais de alto valor que ainda não compram gifts</li>
               </ul>
             </div>
           </CardContent>
