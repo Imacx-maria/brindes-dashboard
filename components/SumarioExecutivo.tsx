@@ -109,6 +109,22 @@ const SumarioExecutivo = () => {
               ))}
             </div>
 
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="bg-amber-50 p-4 rounded">
+                <h3 className="font-medium">Análise de Margens 2023</h3>
+                <p className="text-2xl font-bold">227.590,17€</p>
+                <p className="text-sm">Encomendas menos Vendas</p>
+                <p className="text-lg font-semibold text-green-600">Margem 43%</p>
+              </div>
+              <div className="bg-amber-100 p-4 rounded">
+                <h3 className="font-medium">Análise de Margens 2024</h3>
+                <p className="text-2xl font-bold">153.734,63€</p>
+                <p className="text-sm">Encomendas menos Vendas</p>
+                <p className="text-lg font-semibold text-orange-600">Margem 31%</p>
+                <p className="text-sm text-red-600 font-medium">-30.954,26€ vendas face a 2023</p>
+              </div>
+            </div>
+
             <div className="space-y-6">
               <div className="p-4 bg-white border rounded">
                 <h3 className="font-semibold mb-2 text-lg">Situação Atual</h3>

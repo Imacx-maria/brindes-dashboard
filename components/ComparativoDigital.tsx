@@ -155,21 +155,25 @@ const ComparativoDigital = () => {
               </div>
             </div>
 
-            <div className="h-80 mb-16">
+            <div className="h-[500px] mb-16">
               <h3 className="font-medium mb-4">Top Clientes Digital com Compras em Gifts</h3>
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={digitalGiftsData}>
+                <BarChart 
+                  data={digitalGiftsData}
+                  margin={{ top: 20, right: 30, left: 20, bottom: 100 }}
+                >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis 
                     dataKey="displayName"
                     angle={-45} 
                     textAnchor="end" 
                     height={100}
-                    tick={{ fontSize: '10px' }}
+                    tick={{fontSize: '10px'}}
+                    interval={0}
                   />
                   <YAxis />
                   <Tooltip 
-                    formatter={(value) => `€${value.toFixed(2)}`}
+                    formatter={(value) => typeof value === 'number' ? `€${value.toFixed(2)}` : value}
                     labelFormatter={(label, payload) => payload[0]?.payload?.cliente || label}
                   />
                   <Legend verticalAlign="top" align="right" />
@@ -179,21 +183,25 @@ const ComparativoDigital = () => {
               </ResponsiveContainer>
             </div>
 
-            <div className="h-80 mb-16">
+            <div className="h-[500px] mb-16">
               <h3 className="font-medium mb-4">Top Clientes Digital sem Compras em Gifts</h3>
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={digitalNoGiftsData}>
+                <BarChart 
+                  data={digitalNoGiftsData}
+                  margin={{ top: 20, right: 30, left: 20, bottom: 100 }}
+                >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis 
                     dataKey="displayName"
                     angle={-45} 
                     textAnchor="end" 
                     height={100}
-                    tick={{ fontSize: '10px' }}
+                    tick={{fontSize: '10px'}}
+                    interval={0}
                   />
                   <YAxis />
                   <Tooltip 
-                    formatter={(value) => `€${value.toFixed(2)}`}
+                    formatter={(value) => typeof value === 'number' ? `€${value.toFixed(2)}` : value}
                     labelFormatter={(label, payload) => payload[0]?.payload?.cliente || label}
                   />
                   <Legend verticalAlign="top" align="right" />

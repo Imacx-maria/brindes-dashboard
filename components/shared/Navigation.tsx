@@ -7,13 +7,11 @@ import Link from 'next/link';
 
 export const navigationLinks = [
   { name: 'Sumário Executivo', path: '/' },
-  { name: 'Análise de Brindes', path: '/analise-brindes' },
-  { name: 'Análise de Overlap', path: '/analise-overlap' },
   { name: 'Análise Temporal', path: '/analise-temporal' },
   { name: 'Análise de Ticket Médio', path: '/analise-ticket-medio' },
+  { name: 'Volume Vendas Cliente', path: '/SalesDashboard' },
   { name: 'Comparativo Digital', path: '/comparativo-digital' },
-  { name: 'Análise de Gifts', path: '/gifts-analysis' },
-  { name: 'Dashboard de Gifts', path: '/gifts-dashboard' }
+  { name: 'Potenciais Clientes', path: '/analise-brindes' },
 ];
 
 const Navigation = () => {
