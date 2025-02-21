@@ -8,8 +8,9 @@ import Link from 'next/link';
 export const navigationLinks = [
   { name: 'Sumário Executivo', path: '/' },
   { name: 'Análise Temporal', path: '/analise-temporal' },
-  { name: 'Análise de Ticket Médio', path: '/analise-ticket-medio' },
   { name: 'Volume Vendas Cliente', path: '/SalesDashboard' },
+  { name: 'Análise de Ticket Médio', path: '/analise-ticket-medio' },
+  { name: 'Clientes - Equilibrio', path: '/BalancedClientsTable' },
   { name: 'Comparativo Digital', path: '/comparativo-digital' },
   { name: 'Potenciais Clientes', path: '/analise-brindes' },
 ];

@@ -1,8 +1,18 @@
+'use client';
+
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import Navigation from '@/components/shared/Navigation';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 const SumarioExecutivo = () => {
+  const clientDistribution = [
+    { name: 'Micro (<1k€)', value: 61.3, color: '#FF8042' },
+    { name: 'Pequenos (1k-5k€)', value: 26.4, color: '#FFBB28' },
+    { name: 'Médios (5k-25k€)', value: 9.8, color: '#00C49F' },
+    { name: 'Grandes (>25k€)', value: 2.5, color: '#0088FE' }
+  ];
+
   const analysisCards = [
     {
       title: 'Análise de Brindes',
@@ -36,6 +46,24 @@ const SumarioExecutivo = () => {
             <CardTitle>Sumário Executivo - Departamento de Brindes</CardTitle>
           </CardHeader>
           <CardContent>
+            {/* Margin Analysis Cards */}
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="bg-amber-50 p-4 rounded">
+                <h3 className="font-medium">Análise de Margens 2023</h3>
+                <p className="text-2xl font-bold">227.590,17€</p>
+                <p className="text-sm">Encomendas menos Vendas</p>
+                <p className="text-lg font-semibold text-green-600">Margem 43%</p>
+              </div>
+              <div className="bg-amber-100 p-4 rounded">
+                <h3 className="font-medium">Análise de Margens 2024</h3>
+                <p className="text-2xl font-bold">153.734,63€</p>
+                <p className="text-sm">Encomendas menos Vendas</p>
+                <p className="text-lg font-semibold text-orange-600">Margem 31%</p>
+                <p className="text-sm text-red-600 font-medium">-30.954,26€ vendas face a 2023</p>
+              </div>
+            </div>
+
+            {/* Rest of the content remains the same as in your original file */}
             <div className="space-y-4 mb-6">
               <div className="grid grid-cols-3 gap-4">
                 <div className="bg-blue-50 p-4 rounded">
@@ -54,7 +82,7 @@ const SumarioExecutivo = () => {
                   <h3 className="font-medium">Concentração 2023</h3>
                   <p className="text-2xl font-bold">78.2%</p>
                   <p className="text-sm">Vendas top 20 clientes</p>
-                  <p className="text-sm">9 clientes &gt; €10k</p>
+                  <p className="text-sm">9 clientes > €10k</p>
                 </div>
               </div>
 
@@ -75,11 +103,12 @@ const SumarioExecutivo = () => {
                   <h3 className="font-medium">Concentração 2024</h3>
                   <p className="text-2xl font-bold">76.6%</p>
                   <p className="text-sm">Vendas top 20 clientes</p>
-                  <p className="text-sm">11 clientes &gt; €10k</p>
+                  <p className="text-sm">11 clientes > €10k</p>
                 </div>
               </div>
             </div>
 
+            {/* Analysis Links */}
             <div className="grid grid-cols-3 gap-6 mb-6">
               {analysisCards.map((card) => (
                 <a key={card.path} href={card.path} className="no-underline">
@@ -109,83 +138,102 @@ const SumarioExecutivo = () => {
               ))}
             </div>
 
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="bg-amber-50 p-4 rounded">
-                <h3 className="font-medium">Análise de Margens 2023</h3>
-                <p className="text-2xl font-bold">227.590,17€</p>
-                <p className="text-sm">Encomendas menos Vendas</p>
-                <p className="text-lg font-semibold text-green-600">Margem 43%</p>
-              </div>
-              <div className="bg-amber-100 p-4 rounded">
-                <h3 className="font-medium">Análise de Margens 2024</h3>
-                <p className="text-2xl font-bold">153.734,63€</p>
-                <p className="text-sm">Encomendas menos Vendas</p>
-                <p className="text-lg font-semibold text-orange-600">Margem 31%</p>
-                <p className="text-sm text-red-600 font-medium">-30.954,26€ vendas face a 2023</p>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div className="p-4 bg-white border rounded">
-                <h3 className="font-semibold mb-2 text-lg">Situação Atual</h3>
-                <div className="space-y-2">
-                  <p className="font-medium">Eficiência Operacional:</p>
-                  <ul className="list-disc pl-6 space-y-1">
-                    <li>Alta dispersão de esforço: 61% dos clientes (100) geram menos de €1.000 em vendas</li>
-                    <li>Grande variação no ticket médio: de €456 a €4.772 por pedido</li>
-                    <li>Dois perfis distintos de clientes: alto volume/baixo ticket vs. baixo volume/alto ticket</li>
-                  </ul>
-                  
-                  <p className="font-medium mt-4">Sazonalidade:</p>
-                  <ul className="list-disc pl-6 space-y-1">
-                    <li>Picos de venda em Q2 (Jun) e Q4 (Out-Dez)</li>
-                    <li>Q2 2024: +19.7% vs 2023</li>
-                    <li>Q4 2024: -25.1% vs 2023</li>
-                  </ul>
-                  
-                  <p className="font-medium mt-4">Clientes de Referência:</p>
-                  <ul className="list-disc pl-6 space-y-1">
-                    <li>Top 3: Niusistemas (€88.5k), Sumol+Compal (€54.1k), Altavia (€49.2k)</li>
-                    <li>Maior eficiência: Lassarat (€4.772/pedido), Tubos Vouga (€3.674/pedido)</li>
-                    <li>8 dos top 10 clientes digital também compram brindes</li>
-                  </ul>
+            {/* Client Distribution Chart */}
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle>Distribuição de Clientes</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="h-80">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={clientDistribution}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={true}
+                        label={({ name, value }) => `${name} (${value}%)`}
+                        outerRadius={130}
+                        fill="#8884d8"
+                        dataKey="value"
+                      >
+                        {clientDistribution.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                    </PieChart>
+                  </ResponsiveContainer>
                 </div>
-              </div>
+              </CardContent>
+            </Card>
 
-              <div className="p-4 bg-white border rounded">
-                <h3 className="font-semibold mb-2 text-lg">Recomendações Prioritárias</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="font-medium">Curto Prazo:</p>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>Investigar queda de performance em Q4</li>
-                      <li>Análise detalhada dos novos clientes (32 adicionais)</li>
-                      <li>Avaliar impacto da redução do ticket médio</li>
+            {/* Critical Points */}
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle>Pontos Críticos e Ações Recomendadas</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="bg-red-50 p-4 rounded-lg">
+                    <h3 className="font-semibold mb-2">Erosão de Margem</h3>
+                    <p className="text-sm mb-2">Queda de 12pp na margem requer ação imediata:</p>
+                    <ul className="text-sm list-disc pl-4">
+                      <li>Revisão de pricing</li>
+                      <li>Consolidação de fornecedores</li>
+                      <li>Otimização de encomendas</li>
                     </ul>
                   </div>
-                  <div>
-                    <p className="font-medium">Médio Prazo:</p>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>Desenvolver top 10 digital não ativos em brindes</li>
-                      <li>Replicar modelo de clientes mais eficientes</li>
-                      <li>Reavaliar atendimento a clientes de baixo valor</li>
+
+                  <div className="bg-yellow-50 p-4 rounded-lg">
+                    <h3 className="font-semibold mb-2">Fragmentação de Carteira</h3>
+                    <p className="text-sm mb-2">61% dos clientes abaixo de 1.000€:</p>
+                    <ul className="text-sm list-disc pl-4">
+                      <li>Implementar valor mínimo</li>
+                      <li>Segmentar atendimento</li>
+                      <li>Consolidar encomendas</li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-green-50 p-4 rounded-lg">
+                    <h3 className="font-semibold mb-2">Oportunidades Cross-Sell</h3>
+                    <p className="text-sm mb-2">320k€+ em potencial imediato:</p>
+                    <ul className="text-sm list-disc pl-4">
+                      <li>Abordar top 5 contas digital</li>
+                      <li>Integrar propostas comerciais</li>
+                      <li>Desenvolver ofertas específicas</li>
                     </ul>
                   </div>
                 </div>
-              </div>
+              </CardContent>
+            </Card>
 
-              <div className="p-4 bg-white border rounded">
-                <h3 className="font-semibold mb-2 text-lg">Potencial de Crescimento</h3>
-                <div className="space-y-2">
-                  <ul className="list-disc pl-6 space-y-1">
-                    <li>Cross-selling com clientes digital de alto valor</li>
-                    <li>Expansão de categorias com clientes de alto ticket médio</li>
-                    <li>Estabelecimento de orçamentos anuais com top 20 clientes</li>
-                    <li>Foco em recuperação da performance Q4 para 2025</li>
-                  </ul>
+            {/* Goals 2025 */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Metas 2025</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <div className="text-xl font-bold">38-40%</div>
+                    <div className="text-sm text-gray-600">Margem-alvo</div>
+                  </div>
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <div className="text-xl font-bold">1.500€</div>
+                    <div className="text-sm text-gray-600">Ticket médio</div>
+                  </div>
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <div className="text-xl font-bold">-25%</div>
+                    <div className="text-sm text-gray-600">Redução de encomendas</div>
+                  </div>
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <div className="text-xl font-bold">+30%</div>
+                    <div className="text-sm text-gray-600">Cross-sell digital</div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </CardContent>
         </Card>
       </div>

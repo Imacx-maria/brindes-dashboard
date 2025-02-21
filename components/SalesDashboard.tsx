@@ -9,7 +9,24 @@ import {
 } from 'recharts';
 
 const SalesDashboard = () => {
-  // Dados estáticos baseados na análise anterior
+  const top15Data = [
+    { cliente: 'NIUSISTEMAS', vendas2024: 88563.77, vendas2023: 40752.20 },
+    { cliente: 'SUMOL+COMPAL', vendas2024: 54116.31, vendas2023: 15813.00 },
+    { cliente: 'ALTAVIA', vendas2024: 49260.93, vendas2023: 60049.75 },
+    { cliente: 'COMMUNISIS', vendas2024: 26144.37, vendas2023: 60530.33 },
+    { cliente: 'HH', vendas2024: 24680.50, vendas2023: 5160 },
+    { cliente: 'LASSARAT', vendas2024: 19090.00, vendas2023: 13754.80 },
+    { cliente: 'UNIV.CATOLICA', vendas2024: 18771.65, vendas2023: 29517.90 },
+    { cliente: 'ISS-OEIRAS', vendas2024: 12101.22, vendas2023: 12437.50 },
+    { cliente: 'PROMOTORRES', vendas2024: 11322.40, vendas2023: 24733.15 },
+    { cliente: 'TUBOS VOUGA', vendas2024: 11023.50, vendas2023: 10484.07 },
+    { cliente: 'SUMA', vendas2024: 10742.00, vendas2023: 4068 },
+    { cliente: 'NESTLÉ', vendas2024: 9529.60, vendas2023: 8050 },
+    { cliente: 'CREATIVE WAVE', vendas2024: 8884.50, vendas2023: 0 },
+    { cliente: 'LABORATÓRIOS ATRAL', vendas2024: 7107.00, vendas2023: 4045 },
+    { cliente: 'DENTSU', vendas2024: 6472.60, vendas2023: 3111 }
+  ];
+
   const salesData = {
     totalCustomers: 500,
     belowThousand: 261,
@@ -34,6 +51,36 @@ const SalesDashboard = () => {
       <h1 className="text-3xl font-bold text-gray-900 mb-6">
         Dashboard de Análise de Vendas
       </h1>
+
+      {/* New Top 15 Comparison Chart */}
+      <Card className="mb-6">
+        <CardHeader>
+          <CardTitle>15 Maiores Clientes - Comparativo 2023/2024</CardTitle>
+        </CardHeader>
+        <CardContent className="h-[500px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              data={top15Data}
+              margin={{ top: 20, right: 30, left: 20, bottom: 100 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis 
+                dataKey="cliente" 
+                interval={0}
+                angle={-45}
+                textAnchor="end"
+                height={100}
+                tick={{ fontSize: 12 }}
+              />
+              <YAxis />
+              <Tooltip formatter={(value) => `${value.toLocaleString()}€`} />
+              <Legend />
+              <Bar dataKey="vendas2023" name="2023" fill="#8884d8" />
+              <Bar dataKey="vendas2024" name="2024" fill="#82ca9d" />
+            </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <Card>
