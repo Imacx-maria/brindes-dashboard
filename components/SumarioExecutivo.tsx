@@ -82,7 +82,7 @@ const SumarioExecutivo = () => {
                   <h3 className="font-medium">Concentração 2023</h3>
                   <p className="text-2xl font-bold">78.2%</p>
                   <p className="text-sm">Vendas top 20 clientes</p>
-                  <p className="text-sm">9 clientes > €10k</p>
+                  <p className="text-sm">9 clientes {`>`} €10k</p>
                 </div>
               </div>
 
@@ -103,7 +103,7 @@ const SumarioExecutivo = () => {
                   <h3 className="font-medium">Concentração 2024</h3>
                   <p className="text-2xl font-bold">76.6%</p>
                   <p className="text-sm">Vendas top 20 clientes</p>
-                  <p className="text-sm">11 clientes > €10k</p>
+                  <p className="text-sm">11 clientes &gt; €10k</p>
                 </div>
               </div>
             </div>
